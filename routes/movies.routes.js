@@ -40,10 +40,24 @@ router.get("/movies/:id", (req, res, next) => {
   MovieModel.findById(id)
     .populate("cast")
     .then((movie) => {
+      console.log(movie);
       res.render("movies/movie-details", { movie });
     })
     .catch((err) => {
       next("Error in movies Id", err);
+    });
+});
+
+router.post("/movies/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+
+  MovieModel.findByIdAndRemove(id)
+    .then(() => {
+      res.redirect("/movies");
+    })
+    .catch((err) => {
+      console.log(err);
+      next("Error with delete", err);
     });
 });
 

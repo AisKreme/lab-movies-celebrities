@@ -3,8 +3,12 @@
 {{movie.genre}}
 {{movie.plot}}
 
-{{#each movie}}
+{{#each movie.cast}}
   {{this.name}}
   {{this.occupation}}
   {{this.catchPhrase}}
 {{/each}}
+
+<form method="post" action="/movies/{{movie._id}}/delete">
+  <button type="submit">DELETE</button>
+</form>
